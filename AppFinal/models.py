@@ -38,4 +38,4 @@ class Lambo(models.Model) :
     color  = models.CharField(max_length=50)
     fabricacion = models.CharField(max_length=50)
     modelo = models.CharField(max_length=50)
-    anio_fabricacion = models.IntegerFielFerrari
+    anio_fabricacion = models.IntegerField()
