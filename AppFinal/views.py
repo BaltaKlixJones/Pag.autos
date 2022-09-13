@@ -30,7 +30,7 @@ def audi(request):
     return HttpResponse(texto)
 
 def lambo(request):
-    lambo = Lambo(modelo ="GLC", color="Blanco", fabricacion="Italia", anio_fabricacion=1926)
+    lambo = Lambo(modelo ="Gallardo", color="amarillo", fabricacion="Italia", anio_fabricacion=2020)
     lambo.save()
     texto = f"Auto creado:{lambo.modelo}, {lambo.nombre} ,{lambo.fabricacion}.Fecha de fabricacion de la marca: {lambo.anio_fabricacion} "
     return HttpResponse(texto)
