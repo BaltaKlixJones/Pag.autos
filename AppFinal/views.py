@@ -8,8 +8,6 @@ from .models import *
 def inicio(request):
     return render (request, "AppFinal/inicio.html")
 
-def autos(request):
-    return render (request, "AppFinal/autos.html")
 
 def motos(request):
     return render (request, "AppFinal/motos.html")
@@ -34,13 +32,15 @@ def registrarse(request):
     return render (request, "AppFinal/registrarse.html") 
 
 def autosform(request):
-    if request.method== "POST":
+    if request.method == "POST":
         marca=request.POST.get("marca")
+        tipo=request.POST.get("tipo")
         color=request.POST.get("color")
-        auto_nuevo= Autos(marca=marca, color= color)
-        auto_nuevo.save()
-        return render( request, "AppFinal/inicio.html")
-    return render( request, "AppFinal/autosform.html")
+        anio=request.POST.get("año")
+        auto= Autos(marca= marca, color= color, tipo= tipo, anio= anio)
+        auto.save()
+        return render( request, "AppFinal/padre.html")
+    return render( request, "AppFinal/autos.html")
 
 
 
