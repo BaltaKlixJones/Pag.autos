@@ -1,6 +1,37 @@
+from enum import auto
+from turtle import color
 from django.db import models
 
 # Create your models here.
+
+class Autos(models.Model):
+    marca= models.CharField(max_length=50)
+    tipo= models.CharField(max_length=50)
+    color=models.CharField(max_length=50)
+    anio = models.IntegerField()
+
+
+class Motos(models.Model):
+    marca= models.CharField(max_length=50)
+    tipo= models.CharField(max_length=50)
+    color=models.CharField(max_length=50)
+    anio = models.IntegerField()
+
+
+class Camiones(models.Model):
+    marca= models.CharField(max_length=50)
+    tipo= models.CharField(max_length=50)
+    color=models.CharField(max_length=50)
+    anio = models.IntegerField()
+
+
+class Aviones(models.Model):
+    marca= models.CharField(max_length=50)
+    tipo= models.CharField(max_length=50)
+    color=models.CharField(max_length=50)
+    anio = models.IntegerField()
+
+# otra cosa
 
 class Vw(models.Model) :
     color = models.CharField(max_length=50)

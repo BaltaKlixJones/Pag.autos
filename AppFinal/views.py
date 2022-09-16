@@ -4,6 +4,61 @@ from .models import *
 
 # Create your views here.
 
+
+def inicio(request):
+    return render (request, "AppFinal/inicio.html")
+
+def autos(request):
+    return render (request, "AppFinal/autos.html")
+
+def motos(request):
+    return render (request, "AppFinal/motos.html")
+
+def camiones(request):
+    return render (request, "AppFinal/camiones.html")
+
+def aviones(request):
+    return render (request, "AppFinal/aviones.html")
+
+
+def land(request):
+    return render (request, "AppFinal/landing.html")
+
+def gen(request):
+    return render (request, "AppFinal/generic.html")
+
+def elem(request):
+    return render (request, "AppFinal/elements.html")
+
+def registrarse(request):
+    return render (request, "AppFinal/registrarse.html") 
+
+def autosform(request):
+    if request.method== "POST":
+        marca=request.POST.get("marca")
+        color=request.POST.get("color")
+        auto_nuevo= Autos(marca=marca, color= color)
+        auto_nuevo.save()
+        return render( request, "AppFinal/inicio.html")
+    return render( request, "AppFinal/autosform.html")
+
+
+
+
+
+def nosotros(request):
+    pass
+
+
+
+
+
+
+
+
+
+
+"""
 def volkswagen(request):
     volkswagen = Vw(modelo ="Vento", color="Gris", fabricacion="Alemania", anio_fabricacion= 1934 )
     volkswagen.save()
@@ -39,6 +94,7 @@ def mercedes(request):
     mercedes.save()
     texto = f"Auto creado:{mercedes.modelo}, {mercedes.nombre} ,{mercedes.fabricacion}.Fecha de fabricacion de la marca: {mercedes.anio_fabricacion} "
     return HttpResponse(texto)
+    """
 
 
 # Creando paginas 
@@ -46,24 +102,6 @@ def mercedes(request):
 def inicio(request):
     return render (request, "AppFinal/inicio.html")
 
-def auto_vksw(request):
-    return render (request, "AppFinal/vw.html")
-
-def auto_bmw(request):
-    return render (request, "AppFinal/bmw.html")
-
-def auto_mercedes(request):
-    return render (request, "AppFinal/mercedes.html")
-
-def auto_audi(request):
-    return render (request, "AppFinal/audi.html")
-
-def auto_lamborgini(request):
-    return render (request, "AppFinal/lamborgini.html")
-
-def auto_ferrari(request):
-    return render (request, "AppFinal/ferrari.html")
-    
 def land(request):
     return render (request, "AppFinal/landing.html")
 
