@@ -20,15 +20,19 @@
 {% endblock %}
 
 {% block cargar %} 
-<h2>Agragar auto nuevo</h2>
+<h2>Agregar auto nuevo</h2>
 {% endblock %}
 
 {% block historia %}
 <div style="width: 500px;">
-<form action="{% url 'inicio' %}", method="POST"> {% csrf_token %}
+<form action="{% url 'autos' %}", method="POST"> {% csrf_token %}
+
     <p> Marca: <input type="text" name="marca"> </p>
+
     <p> Modelo: <input type="text" name="modelo"> </p>
+
     <p> Color: <input type="text" name="color"> </p>
+
     <p> Año: <input style="background:rgba(212, 212, 255, 0.035) ;" type="number" name="anio"> </p>
 </div>
 
