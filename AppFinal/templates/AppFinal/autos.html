@@ -19,13 +19,18 @@
 <img src="/static/AppFinal/assets/images/vwinicio.jpg" alt="" />
 {% endblock %}
 
-{% block historia %}
+{% block cargar %} 
+<h2>Agragar auto nuevo</h2>
+{% endblock %}
 
-<form action="{% url 'autos' %}", method="POST"> {% csrf_token %}
+{% block historia %}
+<div style="width: 500px;">
+<form action="{% url 'inicio' %}", method="POST"> {% csrf_token %}
     <p> Marca: <input type="text" name="marca"> </p>
-    <p> Tipo: <input type="text" name="tipo"> </p>
+    <p> Modelo: <input type="text" name="modelo"> </p>
     <p> Color: <input type="text" name="color"> </p>
-    <p> Año: <input style="background:rgba(212, 212, 255, 0.035) ;" type="number" name="año"> </p>
+    <p> Año: <input style="background:rgba(212, 212, 255, 0.035) ;" type="number" name="anio"> </p>
+</div>
 
     <input type="submit", value="Enviar">
 </form>

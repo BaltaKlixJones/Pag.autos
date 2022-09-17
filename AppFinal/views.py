@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import *
+from .models import Autos, Motos, Aviones, Camiones
 
 # Create your views here.
 
@@ -31,16 +31,16 @@ def elem(request):
 def registrarse(request):
     return render (request, "AppFinal/registrarse.html") 
 
-def autosform(request):
+def autos(request):
     if request.method == "POST":
         marca=request.POST.get("marca")
-        tipo=request.POST.get("tipo")
+        modelo=request.POST.get("modelo")
         color=request.POST.get("color")
-        anio=request.POST.get("año")
-        auto= Autos(marca= marca, color= color, tipo= tipo, anio= anio)
+        anio=request.POST.get("anio")
+        auto= Autos(marca= marca, modelo= modelo, color= color, anio= anio)
         auto.save()
         return render( request, "AppFinal/padre.html")
-    return render( request, "AppFinal/autos.html")
+    return render (request, "AppFinal/autos.html")
 
 
 
@@ -48,53 +48,6 @@ def autosform(request):
 
 def nosotros(request):
     pass
-
-
-
-
-
-
-
-
-
-
-"""
-def volkswagen(request):
-    volkswagen = Vw(modelo ="Vento", color="Gris", fabricacion="Alemania", anio_fabricacion= 1934 )
-    volkswagen.save()
-    texto = f"Auto creado: {volkswagen.modelo}, {volkswagen.nombre} ,{volkswagen.fabricacion}.Fecha de fabricacion de la marca: {volkswagen.anio_fabricacion}"
-    return HttpResponse(texto)
-
-def bmw(request):
-    bmw = Bmw(modelo ="Z4", color="Negro", fabricacion="Alemania", anio_fabricacion= 1916)
-    bmw.save()
-    texto = f"Auto creado: {bmw.modelo}, {bmw.nombre} ,{bmw.fabricacion}.Fecha de fabricacion de la marca:{bmw.anio_fabricacion} "
-    return HttpResponse(texto)
-
-def ferrari(request):
-    ferrari = Ferrari(modelo ="f40", color="Rojo", fabricacion="Italia", anio_fabricacion=1987)
-    ferrari.save()
-    texto = f"Auto creado:{ferrari.modelo}, {ferrari.nombre} ,{ferrari.fabricacion}.Fecha de fabricacion de la marca: {ferrari.anio_fabricacion} "
-    return HttpResponse(texto)
-
-def audi1(request):
-    audi = Audi(modelo ="TT", color="azul", fabricacion="Alemaia", anio_fabricacion=1926)
-    audi.save()
-    texto = f"Auto creado:{audi.modelo}, {audi.nombre} ,{auto_audi.fabricacion}.Fecha de fabricacion de la marca: {audi.anio_fabricacion} "
-    return HttpResponse(texto)
-
-def lambo(request):
-    lambo = Lambo(modelo ="Gallardo", color="amarillo", fabricacion="Italia", anio_fabricacion=2020)
-    lambo.save()
-    texto = f"Auto creado:{lambo.modelo}, {lambo.nombre} ,{lambo.fabricacion}.Fecha de fabricacion de la marca: {lambo.anio_fabricacion} "
-    return HttpResponse(texto)
-
-def mercedes(request):
-    mercedes = Mercedes(modelo ="GLC", color="Blanco", fabricacion="Alemaia", anio_fabricacion=1926)
-    mercedes.save()
-    texto = f"Auto creado:{mercedes.modelo}, {mercedes.nombre} ,{mercedes.fabricacion}.Fecha de fabricacion de la marca: {mercedes.anio_fabricacion} "
-    return HttpResponse(texto)
-    """
 
 
 # Creando paginas 

@@ -8,9 +8,6 @@ urlpatterns = [
     path("motos/", motos, name= "motos"),
     path("aviones/", aviones, name= "aviones"),
     path("camiones/", camiones, name= "camiones"),
-    path("autos/", autosform, name= "autos"),
-    path('landing/', land, name='landing'),
-    path('elements/', elem, name='elements'),
-    path('generic/', gen, name='generic'),
+    path("autos/", autos, name= "autos"),
     path('registrarse/', registrarse, name='registrarse'),
 ]
