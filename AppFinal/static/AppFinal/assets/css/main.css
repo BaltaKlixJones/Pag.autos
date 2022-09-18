@@ -114,6 +114,9 @@ input, select, textarea {
 		}
 
 /* Type */
+input#id_año {
+	background: rgba(212, 212, 255, 0.035);
+}
 
 	body, input, select, textarea {
 		color: #ffffff;

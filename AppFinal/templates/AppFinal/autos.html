@@ -20,23 +20,20 @@
 {% endblock %}
 
 {% block cargar %} 
-<h2>Agregar auto nuevo</h2>
+{{ mensaje }}
+<h2>Agrega tu auto preferido:</h2>
 {% endblock %}
 
 {% block historia %}
-<div style="width: 500px;">
-<form action="{% url 'autos' %}", method="POST"> {% csrf_token %}
+<div style="width: 500px ;">
+    <form action="{% url 'autos' %}" method="POST"> {% csrf_token %}
+        <table>
 
-    <p> Marca: <input type="text" name="marca"> </p>
+            {{ formulario.as_table }}
 
-    <p> Modelo: <input type="text" name="modelo"> </p>
+        </table>
 
-    <p> Color: <input type="text" name="color"> </p>
-
-    <p> Año: <input style="background:rgba(212, 212, 255, 0.035) ;" type="number" name="anio"> </p>
+        <input type="submit", value="Guardar">
+    </form>
 </div>
-
-    <input type="submit", value="Enviar">
-</form>
-
 {% endblock %}

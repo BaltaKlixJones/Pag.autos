@@ -24,7 +24,7 @@
 					<header id="header" class="alt">
 						<a href="{% url 'inicio' %}" class="logo"><strong>Inicio</strong> <span>by equipo coder</span></a>
 						<nav>	
-							<a href="#menu" class="btn btn-outline-dark">Buscar</a>
+							<a href="#menu" class="btn btn-outline-dark">Buscar vehiculo</a>
 							<a href="admin/" class="btn btn-outline-dark">Iniciar sesion</a>
 						</nav>
 						
@@ -53,6 +53,7 @@
 					<section id="banner" class="major">
 						<div class="inner">
 							<header class="major">
+								{% block mensaje %} {% endblock %}
 								<h1> Página inicial</h1>
 							</header>
 							<div class="content">

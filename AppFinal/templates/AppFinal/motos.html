@@ -19,6 +19,21 @@
 <img src="/static/AppFinal/assets/images/vwinicio.jpg" alt="" />
 {% endblock %}
 
+{% block cargar %} 
+{{ mensaje }}
+<h2>Agrega tu moto preferida:</h2>
+{% endblock %}
+
 {% block historia %}
-<p>Algunas personas los coleccionan como hobbie, otras solo lo usan para transportarse</p>
+<div style="width: 500px ;">
+    <form action="{% url 'motos' %}" method="POST"> {% csrf_token %}
+        <table>
+
+            {{ formulario.as_table }}
+
+        </table>
+
+        <input type="submit", value="Guardar">
+    </form>
+</div>
 {% endblock %}
