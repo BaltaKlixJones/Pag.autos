@@ -98,7 +98,7 @@ def buscarAuto(request):
 def buscar(request):
     if request.GET["marca"]:
         marca= request.GET["marca"]
-        autos_marca= Autos.objects.filter(marca= marca)
+        autos_marca= Autos.objects.filter(marca__icontains= marca)
         if len(autos_marca) !=0:
             return render(request, "AppFinal/resultadoBusqueda.html", {"autos": autos_marca})
         else:
