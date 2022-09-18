@@ -3,7 +3,7 @@
 
 {% block titulopagina %} 
 
-<title>Automóviles</title>
+<title>Resultado de la busqueda</title>
 
 {% endblock %}
 
@@ -20,23 +20,26 @@
 {% endblock %}
 
 {% block cargar %} 
-{{ mensaje }}
-<h2>Agrega tu auto preferido:</h2>
+
+
+<h2>Resultados:</h2>
 {% endblock %}
 
 {% block historia %}
-<div style="width: 500px ;">
-    <form action="{% url 'autos' %}" method="POST"> {% csrf_token %}
-        <table>
 
-            {{ formulario.as_table }}
+{% if mensaje %}
+<h4">{{ mensaje }}</h4>
 
-        </table>
+{% else %}
 
-        <input type="submit", value="Guardar">
-    </form>
-</div>
 
+{% for a in autos %}
+<h4>
+    <p> Auto encontrado : {{ a.marca }} - Modelo: {{ a.modelo }} - Color: {{ a.color }} - Año {{ a.año }} </p>
+</h4>
+
+{% endfor %}
+{% endif %}
 
 
 {% endblock %}

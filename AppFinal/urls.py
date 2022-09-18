@@ -9,5 +9,7 @@ urlpatterns = [
     path("aviones/", aviones, name= "aviones"),
     path("camiones/", camiones, name= "camiones"),
     path("autos/", autos, name= "autos"),
+    path("buscarauto/", buscarAuto, name="buscarAuto"),
+    path("buscar/", buscar, name="buscar"),
     path('registrarse/', registrarse, name='registrarse'),
 ]

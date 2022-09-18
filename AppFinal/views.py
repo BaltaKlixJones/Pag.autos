@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from .forms import AutoFormulario, MotoFormulario, AvionFormulario, CamionFormulario
 from .models import Autos, Motos, Aviones, Camiones
 
@@ -22,7 +21,7 @@ def autos(request):
             año= info.get("año")
             auto= Autos(marca= marca, modelo= modelo, color= color, año= año)
             auto.save()
-            return render (request, "AppFinal/autos.html", {"mensaje": "Auto nuevo creado!"})
+            return render (request, "AppFinal/autos.html", {"mensaje": "Auto creado con exito!"})
         else:
             return render(request, "AppFinal/autos.html", {"mensaje": "Error!"} )
     else:
@@ -43,16 +42,12 @@ def motos(request):
             año= info.get("año")
             moto= Motos(marca= marca, modelo= modelo, color= color, año= año)
             moto.save()
-            return render (request, "AppFinal/motos.html", {"mensaje": "Moto creada!"})
+            return render (request, "AppFinal/motos.html", {"mensaje": "Moto creada con exito!"})
         else:
             return render(request, "AppFinal/motos.html", {"mensaje": "Error!"} )
     else:
         miFormulario= MotoFormulario()
         return render (request, "AppFinal/motos.html", {"formulario": miFormulario})
-
-
-
-
 
 
 
@@ -68,7 +63,7 @@ def camiones(request):
             año= info.get("año")
             camion= Camiones(marca= marca, modelo= modelo, color= color, año= año)
             camion.save()
-            return render (request, "AppFinal/camiones.html", {"mensaje": "Moto creada!"})
+            return render (request, "AppFinal/camiones.html", {"mensaje": "Camion creado con exito!"})
         else:
             return render(request, "AppFinal/camiones.html", {"mensaje": "Error!"} )
     else:
@@ -87,7 +82,7 @@ def aviones(request):
             año= info.get("año")
             avion= Aviones( modelo= modelo, color= color, año= año)
             avion.save()
-            return render (request, "AppFinal/aviones.html", {"mensaje": "Moto creada!"})
+            return render (request, "AppFinal/aviones.html", {"mensaje": "Avion creado con exito!"})
         else:
             return render(request, "AppFinal/aviones.html", {"mensaje": "Error!"} )
     else:
@@ -95,24 +90,21 @@ def aviones(request):
         return render (request, "AppFinal/aviones.html", {"formulario": miFormulario})
 
 
-# FORMULARIO A MANO
 
-"""
-def autos(request):
-
-    if request.method == "POST":
-        marca=request.POST.get("marca")
-        modelo=request.POST.get("modelo")
-        color=request.POST.get("color")
-        anio=request.POST.get("anio")
-        auto= Autos(marca= marca, modelo= modelo, color= color, anio= anio)
-        auto.save()
-        return render (request, "AppFinal/inicio.html")
-
-    return render (request, "AppFinal/autos.html")
-    """
+def buscarAuto(request):
+    return render (request, "AppFinal/buscarAuto.html")
 
 
+def buscar(request):
+    if request.GET["marca"]:
+        marca= request.GET["marca"]
+        autos_marca= Autos.objects.filter(marca= marca)
+        if len(autos_marca) !=0:
+            return render(request, "AppFinal/resultadoBusqueda.html", {"autos": autos_marca})
+        else:
+            return render(request, "AppFinal/resultadoBusqueda.html", {"mensaje": "No se encontraron resultados"})
+    else:
+        return render (request, "AppFinal/buscarAuto.html", {"mensaje": "No se enviaron datos"})
     
 
 
@@ -138,3 +130,20 @@ def elem(request):
 
 def registrarse(request):
     return render (request, "AppFinal/registrarse.html") 
+
+    # FORMULARIO A MANO
+
+"""
+def autos(request):
+
+    if request.method == "POST":
+        marca=request.POST.get("marca")
+        modelo=request.POST.get("modelo")
+        color=request.POST.get("color")
+        anio=request.POST.get("anio")
+        auto= Autos(marca= marca, modelo= modelo, color= color, anio= anio)
+        auto.save()
+        return render (request, "AppFinal/inicio.html")
+
+    return render (request, "AppFinal/autos.html")
+    """

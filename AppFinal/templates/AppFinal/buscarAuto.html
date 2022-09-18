@@ -20,20 +20,17 @@
 {% endblock %}
 
 {% block cargar %} 
-{{ mensaje }}
-<h2>Agrega tu auto preferido:</h2>
+<h2>Buscar auto por marca:</h2>
 {% endblock %}
 
 {% block historia %}
+
 <div style="width: 500px ;">
-    <form action="{% url 'autos' %}" method="POST"> {% csrf_token %}
-        <table>
+    <form action="{% url 'buscar' %}" method="GET"> {% csrf_token %}
 
-            {{ formulario.as_table }}
-
-        </table>
-
-        <input type="submit", value="Guardar">
+        <p>Marca: <input type="text" name="marca", id="marca"></p>
+        <h4>{{ mensaje }}</h4>
+        <input type="submit", value="Buscar">
     </form>
 </div>
 
