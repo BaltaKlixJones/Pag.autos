@@ -11,14 +11,15 @@
 <h1>Editar Autos</h1>
 {% endblock %}
 
+{% block subtitulo %}
+<h1>{{ mensaje }}</h1>
+{% endblock %}
 
 {% block imagentitulo %}
-<img src="/static/AppFinal/assets/images/vwinicio.jpg" alt="" />
+<img src="/static/AppFinal/assets/images/editarfondo.jpg" alt="" />
 {% endblock %}
 
 {% block cargar %} 
-
-<h1>{{ mensaje }}</h1>
 <h2>Tus Autos: </h2>
 {% endblock %}
 
@@ -29,7 +30,9 @@
 <h4> 
     <ul>
         <li> {{ a.marca }} - {{ a.modelo }} - {{ a.color }} - Año {{ a.año }} </li> 
-            <a href="{% url 'eliminarAuto' a.id %}" class="btn btn-outline-danger" > Eliminar</a>
+            <a href="{% url 'eliminarAuto' a.id %}" class="btn btn-outline-danger" > Eliminar | </a> 
+            <a href="{% url 'editarAuto' a.id %}" class="btn btn-outline-danger" > Editar</a>
+            <hr>
     </ul>
 </h4>
 

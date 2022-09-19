@@ -9,6 +9,11 @@ from .models import Autos, Motos, Aviones, Camiones
 def inicio(request):
     return render (request, "AppFinal/inicio.html")
 
+#.............................................................................#
+
+# SECCION AUTOS 
+# Pagina para crear y ver autos
+
 def autos(request):
     ver_autos= Autos.objects.all()
     if request.method == "POST":
@@ -26,11 +31,13 @@ def autos(request):
 
     return render (request, "AppFinal/autos.html", {"formulario": miFormulario,  "ver_autos": ver_autos})
 
+
 # ver autos para editar
 
 def leerautos(request):
     leerautos= Autos.objects.all()
     return render (request, "AppFinal/leerautos.html", {"leerautos": leerautos})
+
 
 # eliminar autos
 
@@ -40,6 +47,35 @@ def eliminarAuto(request, id ):
     leerautos= Autos.objects.all()
     return render (request, "AppFinal/leerautos.html", {"leerautos": leerautos, "mensaje": "Auto eliminado!"})
 
+
+# editar autos
+
+def editarAutos(request, id):
+    auto = Autos.objects.get(id=id)
+    if request.method == "POST":
+        form = AutoFormulario(request.POST)
+        if form.is_valid():
+            info= form.cleaned_data
+            auto.marca = info["marca"]
+            auto.modelo = info["modelo"]
+            auto.color = info["color"]
+            auto.año = info["año"]
+            auto.save()
+            leerautos= Autos.objects.all()
+            return render (request, "AppFinal/leerautos.html", {"leerautos": leerautos, "mensaje": "Auto editado!"})
+
+    else:
+        formulario = AutoFormulario(initial={"marca": auto.marca , "modelo": auto.modelo , "color": auto.color , "año": auto.año})
+        return render (request, "AppFinal/editarAutos.html", {"formulario": formulario, "auto_marca": auto.marca , "id":auto.id})
+
+
+
+
+
+#.............................................................................#
+
+# SECCION MOTOS 
+# Pagina para crear y ver motos
 
 def motos(request):
     if request.method == "POST":
@@ -62,6 +98,12 @@ def motos(request):
 
 
 
+
+#.............................................................................#
+
+# SECCION CAMIONES
+# Pagina para crear y ver camiones
+
 def camiones(request):
     if request.method == "POST":
         miFormulario= CamionFormulario(request.POST)
@@ -81,6 +123,12 @@ def camiones(request):
         miFormulario= CamionFormulario()
         return render (request, "AppFinal/camiones.html", {"formulario": miFormulario})
 
+
+
+#.............................................................................#
+
+# SECCION AVIONES
+# Pagina para crear y ver aviones
 
 def aviones(request):
     if request.method == "POST":
@@ -150,19 +198,3 @@ def elem(request):
 def registrarse(request):
     return render (request, "AppFinal/registrarse.html") 
 
-    # FORMULARIO A MANO
-
-"""
-def autos(request):
-
-    if request.method == "POST":
-        marca=request.POST.get("marca")
-        modelo=request.POST.get("modelo")
-        color=request.POST.get("color")
-        anio=request.POST.get("anio")
-        auto= Autos(marca= marca, modelo= modelo, color= color, anio= anio)
-        auto.save()
-        return render (request, "AppFinal/inicio.html")
-
-    return render (request, "AppFinal/autos.html")
-    """
