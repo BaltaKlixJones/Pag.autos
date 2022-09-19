@@ -10,23 +10,23 @@ def inicio(request):
     return render (request, "AppFinal/inicio.html")
 
 def autos(request):
+    ver_autos= Autos.objects.all()
     if request.method == "POST":
         miFormulario= AutoFormulario(request.POST)
         print(miFormulario)
         if miFormulario.is_valid():
             info = miFormulario.cleaned_data
-            marca= info.get("marca")
-            modelo= info.get("modelo")
-            color= info.get("color")
-            año= info.get("año")
-            auto= Autos(marca= marca, modelo= modelo, color= color, año= año)
+            auto=Autos(marca= info['marca'], modelo= info['modelo'], color=info['color'], año= info['año'])
             auto.save()
-            return render (request, "AppFinal/autos.html", {"mensaje": "Auto creado con exito!"})
+            return render (request, "AppFinal/autos.html", {"mensaje": "Auto creado con exito!" , "ver_autos": ver_autos})
         else:
             return render(request, "AppFinal/autos.html", {"mensaje": "Error!"} )
     else:
         miFormulario= AutoFormulario()
-        return render (request, "AppFinal/autos.html", {"formulario": miFormulario})
+
+    return render (request, "AppFinal/autos.html", {"formulario": miFormulario,  "ver_autos": ver_autos})
+
+
 
 
 
@@ -104,11 +104,19 @@ def buscar(request):
         else:
             return render(request, "AppFinal/resultadoBusqueda.html", {"mensaje": "No se encontraron resultados"})
     else:
-        return render (request, "AppFinal/buscarAuto.html", {"mensaje": "No se enviaron datos"})
+        return render (request, "AppFinal/autos.html", {"mensaje": "No se enviaron datos!"})
     
 
-
-
+def buscar(request):
+    if request.GET["marca"]:
+        marca= request.GET["marca"]
+        autos_marca= Autos.objects.filter(marca__icontains= marca)
+        if len(autos_marca) !=0:
+            return render(request, "AppFinal/resultadoBusqueda.html", {"autos": autos_marca})
+        else:
+            return render(request, "AppFinal/resultadoBusqueda.html", {"mensaje": "No se encontraron resultados"})
+    else:
+        return render (request, "AppFinal/resultadoBusqueda.html", {"mensaje": "No se enviaron datos!"})
 
 
 

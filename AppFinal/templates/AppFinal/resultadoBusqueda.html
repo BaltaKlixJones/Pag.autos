@@ -11,9 +11,6 @@
 <h1>Automóviles</h1>
 {% endblock %}
 
-{% block subtitulo %}
-<p>Fundador:<br> Ferdinand Porsche</p>
-{% endblock %}
 
 {% block imagentitulo %}
 <img src="/static/AppFinal/assets/images/vwinicio.jpg" alt="" />
@@ -34,12 +31,23 @@
 
 
 {% for a in autos %}
-<h4>
-    <p> Auto encontrado : {{ a.marca }} - Modelo: {{ a.modelo }} - Color: {{ a.color }} - Año {{ a.año }} </p>
+<h4> 
+    <ul>
+   <li> {{ a.marca }} - Modelo: {{ a.modelo }} - Color: {{ a.color }} - Año {{ a.año }} </li> 
+    </ul>
 </h4>
 
 {% endfor %}
+
 {% endif %}
+{% endblock %}
+
+{% block crear %}
+
+<a href="{% url 'autos' %}" class="button back"> Volver </a>
 
 
 {% endblock %}
+
+
+
