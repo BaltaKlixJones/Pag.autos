@@ -10,6 +10,8 @@ urlpatterns = [
     path("camiones/", camiones, name= "camiones"),
     path("autos/", autos, name= "autos"),
     path("buscar/", buscar, name="buscar"),
+    path("leerautos/", leerautos, name="leerautos"),
+    path("eliminarAuto/<id>", eliminarAuto, name="eliminarAuto"),
     path('registrarse/', registrarse, name='registrarse'),
     path('elements/', elem, name='elements')
 ]

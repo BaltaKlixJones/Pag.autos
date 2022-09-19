@@ -9,7 +9,7 @@ class Autos(models.Model):
     año = models.IntegerField()
 
     def __str__(self):
-        return self.marca
+        return self.marca +" "+ self.modelo
 
 class Motos(models.Model):
     marca= models.CharField(max_length=50)
@@ -18,7 +18,7 @@ class Motos(models.Model):
     año = models.IntegerField()
 
     def __str__(self):
-        return self.marca
+        return self.marca +" "+ self.modelo
 
 
 class Camiones(models.Model):
@@ -28,7 +28,7 @@ class Camiones(models.Model):
     año = models.IntegerField()
 
     def __str__(self):
-        return self.marca
+        return self.marca +" "+ self.modelo
 
 
 class Aviones(models.Model):
@@ -37,4 +37,4 @@ class Aviones(models.Model):
     año = models.IntegerField()
 
     def __str__(self):
-        return self.modelo
+        return self.modelo +" " + self.color

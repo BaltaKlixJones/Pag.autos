@@ -67,6 +67,9 @@
 
 <header class="major">
     <h2>Autos creados:</h2>
+    <h5>
+        <a href="{% url 'leerautos' %}" >Editar lista de autos</a> 
+    </h5>
 </header>
 
 
@@ -83,7 +86,7 @@
                 Color
             </th>
             <th>
-                año
+                Año
             </th>
         </thead>
 </div>
@@ -92,10 +95,10 @@
  {% for auto in ver_autos %}
  <tbody>
     <tr>
-        <td>{{ auto.marca }}</td>
-        <td>{{ auto.modelo }}</td>
-        <td>{{ auto.color }}</td>
-        <td>{{ auto.año }}</td>
+        <td>{{ auto.marca }} </td>
+        <td>{{ auto.modelo }} </td>
+        <td>{{ auto.color }} </td>
+        <td>{{ auto.año }}  </td>
     </tr>
 </tbody>
     {% endfor %}

@@ -1,0 +1,50 @@
+{% extends "AppFinal/landing.html" %}
+{% load static %}
+
+{% block titulopagina %} 
+
+<title>Editar autos</title>
+
+{% endblock %}
+
+{% block tituloinicio %} 
+<h1>Editar Autos</h1>
+{% endblock %}
+
+
+{% block imagentitulo %}
+<img src="/static/AppFinal/assets/images/vwinicio.jpg" alt="" />
+{% endblock %}
+
+{% block cargar %} 
+
+<h1>{{ mensaje }}</h1>
+<h2>Tus Autos: </h2>
+{% endblock %}
+
+{% block historia %}
+
+
+{% for a in leerautos %}
+<h4> 
+    <ul>
+        <li> {{ a.marca }} - {{ a.modelo }} - {{ a.color }} - Año {{ a.año }} </li> 
+            <a href="{% url 'eliminarAuto' a.id %}" class="btn btn-outline-danger" > Eliminar</a>
+    </ul>
+</h4>
+
+
+{% endfor %}
+
+
+{% endblock %}
+
+{% block crear %}
+
+<a href="{% url 'autos' %}" class="button back"> Volver </a>
+
+
+{% endblock %}
+
+
+

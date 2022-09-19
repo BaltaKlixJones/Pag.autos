@@ -26,8 +26,19 @@ def autos(request):
 
     return render (request, "AppFinal/autos.html", {"formulario": miFormulario,  "ver_autos": ver_autos})
 
+# ver autos para editar
 
+def leerautos(request):
+    leerautos= Autos.objects.all()
+    return render (request, "AppFinal/leerautos.html", {"leerautos": leerautos})
 
+# eliminar autos
+
+def eliminarAuto(request, id ):
+    eliminar_auto= Autos.objects.get(id=id)
+    eliminar_auto.delete()
+    leerautos= Autos.objects.all()
+    return render (request, "AppFinal/leerautos.html", {"leerautos": leerautos, "mensaje": "Auto eliminado!"})
 
 
 def motos(request):
