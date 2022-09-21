@@ -323,10 +323,9 @@ def editarPerfil(request):
 def nosotros(request):
     pass
 
-# Manejo de error
+# Manejo de errores
 
-
-
+    
 
 
 # Creando paginas 

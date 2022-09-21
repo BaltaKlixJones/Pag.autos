@@ -35,4 +35,3 @@ urlpatterns = [
 
     path('elements/', elem, name='elements'),
 ]
-
