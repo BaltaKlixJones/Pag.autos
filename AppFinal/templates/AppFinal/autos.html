@@ -21,6 +21,7 @@
 
 {% block cargar %} 
 <h3>{{ mensaje }}</h3>
+
 <h2>Un poco de historia ...</h2>
 
 
@@ -31,7 +32,7 @@
 {% endblock %}
 
 {% block info1 %}
-<a href="generic/" class="image">
+<a  class="image">
     <img src="/static/AppFinal/assets/images/primerAuto.jpg" alt="" data-position="center center" />
 </a>
 <div class="content">
@@ -47,7 +48,7 @@
 </div>
 </section>
 <section>
-    <a href="generic/" class="image">
+    <a  class="image">
         <img src="/static/AppFinal/assets/images/creadorAuto.jpg" alt="" data-position="top center" />
     </a>
     <div class="content">
@@ -70,7 +71,10 @@
 <header class="major">
     <h2>Autos creados:</h2>
     <h5>
-        <a href="{% url 'leerautos' %}" >Editar lista de autos</a> 
+        <a href="{% url 'leerautos' %}" >Editar lista de autos |</a> 
+        <a href="#cargar" class="next scrolly">Cargar auto |</a> 
+        <a href="#cargar" class="next scrolly">Buscar auto</a> 
+       
     </h5>
 </header>
 
@@ -115,20 +119,21 @@
 {% endblock %}
 
 {% block crear %}
-<div class="major">
-<h3>Agrega tu auto preferido:</h3>
-</div>
-<div style="width: 500px ;">
-    <form action="" method="POST"> {% csrf_token %}
-        <table>
+<div id="cargar"></div>
+    <div class="major">
+    <h3>Agrega tu auto preferido:</h3>
+    </div>
+    <div style="width: 500px ;">
+        <form action="" method="POST"> {% csrf_token %}
+            <table>
 
-            {{ formulario.as_table }}
+                {{ formulario.as_table }}
 
-        </table>
+            </table>
 
-        <button type="submit" class=""> Guardar </button>
-    </form>
-</div>
+            <button type="submit" class=""> Guardar </button>
+        </form>
+    </div>
 
 {% endblock %}
 

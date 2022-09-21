@@ -1,15 +1,32 @@
-{% extends "AppFinal/padre.html" %}
+{% extends "AppFinal/landing.html" %} 
 {% load static %}
 
-{% block titulo %}
+{% block titulopagina %} 
 
-<title>Inicio</title>
+<title>Login</title>
 
 {% endblock %}
 
-{% block mensaje %}
+{% block tituloinicio %} 
+<h1>Inicia sesion </h1>
+{% endblock %}
 
-<h3>{{ mensaje }}</h3>
+
+
+
+{% block historia %}
+
+    <h1>Login</h1>
+    <h3>{{ mensaje }}</h3>
+<div style="width: 500px ;">
+    <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+        
+
+        {{ form.as_p }}
+        <button type="submit" class="button"> Iniciar Sesion </button>
+
+    </form>
+</div>
 
 {% endblock %}
 

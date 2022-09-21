@@ -3,15 +3,16 @@
 
 {% block titulopagina %} 
 
-<title>Automóviles</title>
+<title>Motocicletas</title>
 
 {% endblock %}
 
 {% block tituloinicio %} 
-<h1>Automóviles</h1>
+<h1>Editar moto</h1>
 {% endblock %}
 
 {% block subtitulo %}
+
 {% endblock %}
 
 {% block imagentitulo %}
@@ -26,10 +27,10 @@
 
 {% block crear %}
 <div class="major">
-<h3>Editando {{ auto_marca }}:</h3>
+<h3>Editando {{ moto_marca }}:</h3>
 </div>
 <div style="width: 500px ;">
-    <form action="{% url 'editarAuto' id %}" method="POST"> {% csrf_token %}
+    <form action="{% url 'editarMoto' id %}" method="POST"> {% csrf_token %}
         <table>
 
             {{ formulario.as_table }}
@@ -40,7 +41,7 @@
     </form>
 </div>
 
-<a href="{% url 'leerautos' %}" class="button back"> Volver </a>
+<a href="{% url 'leermotos' %}" class="button back"> Volver </a>
 {% endblock %}
 
 
