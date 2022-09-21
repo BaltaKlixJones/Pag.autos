@@ -10,7 +10,7 @@ from .models import Autos, Motos, Aviones, Camiones
 
 # Create your views here.
 
-
+# Pagina de inicio
 def inicio(request):
     return render (request, "AppFinal/inicio.html")
 
@@ -37,7 +37,6 @@ def login_request(request):
 
 
 # registro
-
 def register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
@@ -50,8 +49,7 @@ def register(request):
     return render (request, "AppFinal/register.html", {'form': form})
 
 # logout
-
-
+# fue creado como una vista en funcion de clase
 
 
 #.............................................................................#
@@ -204,31 +202,70 @@ def editarMotos(request, id):
 # Pagina para crear y ver camiones
 @login_required
 def camiones(request):
+    ver_camiones= Camiones.objects.all()
     if request.method == "POST":
         miFormulario= CamionFormulario(request.POST)
         print(miFormulario)
         if miFormulario.is_valid():
             info = miFormulario.cleaned_data
-            marca= info.get("marca")
-            modelo= info.get("modelo")
-            color= info.get("color")
-            año= info.get("año")
-            camion= Camiones(marca= marca, modelo= modelo, color= color, año= año)
+            camion=Camiones(marca= info['marca'], modelo= info['modelo'], color=info['color'], año= info['año'])
             camion.save()
-            return render (request, "AppFinal/camiones.html", {"mensaje": "Camion creado con exito!"})
+            return render (request, "AppFinal/camiones.html", {"formulario": miFormulario, "mensaje": "Camion creado con exito!" , "ver_camiones": ver_camiones})
         else:
             return render(request, "AppFinal/camiones.html", {"mensaje": "Error!"} )
     else:
         miFormulario= CamionFormulario()
-        return render (request, "AppFinal/camiones.html", {"formulario": miFormulario})
+
+    return render (request, "AppFinal/camiones.html", {"formulario": miFormulario,  "ver_camiones": ver_camiones})
 
 # buscar camion
+def buscar(request):
+    if request.GET["marca"]:
+        marca= request.GET["marca"]
+        camion_marca= Camiones.objects.filter(marca__icontains= marca)
+        if len(camion_marca) !=0:
+            return render(request, "AppFinal/resultadoBusquedaCamion.html", {"camiones": camion_marca})
+        else:
+            return render(request, "AppFinal/resultadoBusquedaCamion.html", {"mensaje": "No se encontraron resultados"})
+    else:
+        return render (request, "AppFinal/resultadoBusquedaCamion.html", {"mensaje": "No se enviaron datos!"})
 
 # ver camiones para editar
+def leercamiones(request):
+    leercamiones= Camiones.objects.all()
+    return render (request, "AppFinal/leercamiones.html", {"leercamiones": leercamiones})
 
 # elminar camiones
 
+def eliminarCamion(request, id ):
+    eliminar_camion= Camiones.objects.get(id=id)
+    eliminar_camion.delete()
+    leercamiones= Camiones.objects.all()
+    return render (request, "AppFinal/leercamiones.html", {"leercamiones": leercamiones, "mensaje": "Camion eliminado!"})
+
+
 # editar camiones
+
+def editarCamiones(request, id):
+    camion = Camiones.objects.get(id=id)
+    if request.method == "POST":
+        form = CamionFormulario(request.POST)
+        if form.is_valid():
+            info= form.cleaned_data
+            camion.marca = info["marca"]
+            camion.modelo = info["modelo"]
+            camion.color = info["color"]
+            camion.año = info["año"]
+            camion.save()
+            leercamiones= Camiones.objects.all()
+            return render (request, "AppFinal/leercamiones.html", {"leercamiones": leercamiones, "mensaje": "Camion editado!"})
+
+    else:
+        formulario = CamionFormulario(initial={"marca": camion.marca , "modelo": camion.modelo , "color": camion.color , "año": camion.año})
+        return render (request, "AppFinal/editarCamiones.html", {"formulario": formulario, "motos_marca": camion.marca , "id":camion.id})
+
+
+
 
 #.............................................................................#
 
