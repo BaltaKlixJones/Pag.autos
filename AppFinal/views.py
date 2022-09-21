@@ -1,11 +1,13 @@
+import email
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
-from .forms import AutoFormulario, MotoFormulario, AvionFormulario, CamionFormulario, UserRegisterForm
+from .forms import AutoFormulario, MotoFormulario, AvionFormulario, CamionFormulario, UserRegisterForm, UserEditForm
 from .models import Autos, Motos, Aviones, Camiones
 
 # Create your views here.
@@ -132,6 +134,7 @@ def editarAutos(request, id):
 
 # SECCION MOTOS 
 # Pagina para crear y ver motos
+
 @login_required
 def motos(request):
     ver_motos= Motos.objects.all()
@@ -265,8 +268,6 @@ def editarCamiones(request, id):
         return render (request, "AppFinal/editarCamiones.html", {"formulario": formulario, "motos_marca": camion.marca , "id":camion.id})
 
 
-
-
 #.............................................................................#
 
 # SECCION AVIONES
@@ -299,16 +300,36 @@ def aviones(request):
 
 # editar aviones
 
+#.............................................................................#
+# Editar usuario
 
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+
+    if request.method == "POST":
+        form = UserEditForm(request.POST, instance= usuario)
+        if form.is_valid():
+            usuario.save()
+            return render (request, "AppFinal/inicio.html", { "mensaje": f"Usuario {usuario} editado con exito!"})
+    else:
+        form = UserEditForm(instance= usuario)
+    return render (request, "AppFinal/editarPerfil.html", {"form": form, "usuario": usuario})
+
+
+#.............................................................................#
+# Nostros
 
 def nosotros(request):
     pass
 
+# Manejo de error
+
+
+
+
 
 # Creando paginas 
-
-
-
 
 
 
