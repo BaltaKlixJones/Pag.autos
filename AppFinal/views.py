@@ -1,11 +1,15 @@
 import email
+from email import message
+from pipes import Template
+from urllib import request
 from django.shortcuts import render
 from django.http import HttpResponse
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
+from django.shortcuts import render
+from django.views.generic import TemplateView , View
 
 from .forms import AutoFormulario, MotoFormulario, AvionFormulario, CamionFormulario, UserRegisterForm, UserEditForm
 from .models import Autos, Motos, Aviones, Camiones
@@ -44,7 +48,9 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
+            
             form.save()
+            
             return render (request, "AppFinal/inicio.html", {'mensaje': f"Usuario creado! \n Bienvenido {username}!"})
     else:
         form = UserRegisterForm()
@@ -325,8 +331,21 @@ def nosotros(request):
 
 # Manejo de errores
 
-    
+class Error404View(TemplateView):
+    template_name = "AppFinal/error_404.html"
 
+
+class Error500View(TemplateView):
+    template_name = "AppFinal/error_500.html"
+
+    @classmethod
+    def as_error_view(cls):
+        v = cls.as_view()
+        def view(request):
+            r = v(request)
+            r.render()
+            return r 
+        return view
 
 # Creando paginas 
 

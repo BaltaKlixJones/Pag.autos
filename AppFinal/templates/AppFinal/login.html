@@ -19,11 +19,12 @@
     <h1>Login</h1>
     <h3>{{ mensaje }}</h3>
 <div style="width: 500px ;">
-    <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+    <form action="{% url 'inicio' %}" method="POST"> {% csrf_token %}
         
 
         {{ form.as_p }}
         <button type="submit" class="button"> Iniciar Sesion </button>
+        <button type = "text" class="button"><a href="{% url 'register' %}">Regitrarse</a></button>
 
     </form>
 </div>
